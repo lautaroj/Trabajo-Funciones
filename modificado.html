@@ -1,0 +1,199 @@
+<html>
+<head>
+  <title>Ejemplo de JavaScript</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+
+<script>
+
+    // 1)La función toma dos parámetros y devuelva la diferencia entre estos.
+
+    function difference(x, y)
+    {
+        return x-y;
+    }
+    difference(10,4);
+    
+    // 2)La función toma dos valores y devuelve el producto de estos
+    
+    function product(x, y)
+    {
+        return x*y;
+    }
+    product(5,4);
+
+    /* 3)La función recibe un parámetro numérico entre del 1 al 7 y retorna el día de la semana entendiendo
+     que:1 es domingo, 2 es lunes, 3 es martes, etc. Si el parámetro recibido está fuera del rango, deberá mostrar undefined*/
+
+    function printDay(x)
+    {
+        switch(x)
+        {       
+            case 1: return "Domingo";
+                break;
+            case 2: return "Lunes";
+                break;
+            case 3: return "Martes";
+                break;
+            case 4: return "Miércoles";
+                break;
+            case 5: return "Jueves";
+                break;
+            case 6: return "Viernes";
+                break;
+            case 7: return "Sábado";
+                break;
+            default: return "undefined";
+        }
+    }
+    printDay(4);
+
+    // 4)La función tomará un parámetro de un array y deberá devovler el último valor de ese array y undefined si se encuentra vacío.
+
+    function lastElement(valores)
+    {
+        if(valores != null)
+        {
+            return valores[valores.length -1];
+        }
+
+        else
+        {
+            return "undefined";
+        }
+    }
+    lastElement([24, 66, 51, 13, 99, 8]);
+
+    /* 5)La siguiente función toma dos parámteros numéricos y si el primero es mayor al segundo, muestra un mensaje 
+    "El primero es mayor", de lo contrario mostrará "El segundo es mayor". Si ambos números son iguales, muestra "los números son iguales"*/
+    
+    function numberCompare(x1, x2)
+    {
+        if(x1==x2)
+        {
+            return "Los números son iguales";
+        }
+        else if(x1>x2)
+        {
+            return "El primero es mayor";
+        }
+        else
+        {
+            return "El segundo es mayor";
+        }
+    }
+    numberCompare(20, 44);
+
+    /* 6) La función recibe dos parámetros de tipo string. El primero debe ser una palabra y el segundo una letra.
+    Deberá devolver la cantidad de veces que aparece la letra en la palabra. La función no es sensible a mayásculas/minúsculas. De no encontrarse la letra, la función devuelve "0"*/
+    
+    function singleLetterCount(palabra, letra) 
+    {
+        var contador = 0;
+        for (var x = 0; x < palabra.length; x++) 
+        {
+            if (palabra.charAt(x) == letra) 
+            {
+                contador += 1;
+            }
+            else if(palabra.charAt(x) == letra.toUpperCase())
+            {
+                contador += 1;
+            }
+            else if(palabra.charAt(x) == letra.toLowerCase())
+            {
+                contador += 1;
+            }
+        }
+        return contador;
+    }
+    singleLetterCount("Almacenar", "C");
+
+    // 7)La siguiente función recibe una cadena y deberá devolver un objeto donde las letras serán key y el value será el recuento de la letra.
+
+    function multipleLetterCount(palabra) 
+    {
+        var letras = palabra.split("");
+        var contador = {};
+        for(var x = 0; x<letras.length; x++ )
+        {
+            if(contador[letras[x]]==undefined)
+            {
+            contador[letras[x]] = 0;
+            }
+            contador[letras[x]]++;
+        }
+        for(var x in contador)
+        {
+            return x+": "+contador[x]+"<br>";
+        }
+
+    }
+    multipleLetterCount("ortodoncia");
+
+    /* 8)Esta función debe tener como máximo cuatro parámetros (un array, comando, ubicación y valor).
+            Si el comando es "remove" y la ubicación es "end", la función debe eliminar el último valor del array y devolver el valor eliminado. (En este caso, la función solo necesita tres argumentos).
+            Si el comando es "remover" y la ubicación está "beginning", la función debe eliminar el primer valor del array y devolver el valor eliminado. (En este caso, la función solo necesita tres argumentos).
+            Si el comando es "add" y la ubicación está "beginning", la función debe agregar el valor (cuarto parámetro) al comienzo del array y devolver el array.
+            Si el comando es "add" y la ubicación es "end", la función debe agregar el valor (cuarto parámetro) al final del array y devolver el array.*/
+    
+    function arrayManipulation(valores, comando, ubicacion, numero)
+    {
+        if(comando=="remove" && ubicacion=="end")
+        {
+            returnvalores.pop();      
+        }
+        else if(comando=="remove" && ubicacion=="beginning")
+        {
+            return valores.shift();
+        }
+        else if(comando=="add" && ubicacion=="end")
+        {
+            valores.push(numero);
+            return valores;
+        }
+        else
+        {
+            valores.unshift(numero);
+            return valores;
+        }
+    }
+    arrayManipulation([5, 10, 15, 20], "remove", "beginning", 25);
+
+    /* 9)Por ultimo, te propongo que con todo el conocimiento hasta ahora adquirido, escribas un programa que se base 
+    en el juego de Piedra, Papel, Tijera. Mediante el uso del prompt, una persona puede ingresar su elección y mediante una selección aleatorio podrá ganar, perder o empatar contra la computadora.*/
+
+    function juego()
+    {
+        var jugador = prompt("Ingrese piedra, papel o tijera:");
+        const valores = ["piedra", "papel", "tijera"];
+        var aleatorio = valores[Math.floor(Math.random()*valores.length)];
+
+        if(jugador==aleatorio)
+        {
+            return "Jugador: "+jugador+". Computadora: "+aleatorio+". Resultado: Empate";
+        }
+        else if(jugador=="piedra" && aleatorio=="tijera")
+        {
+            return "Jugador: "+jugador+". Computadora: "+aleatorio+". Resultado: Gana el jugador";
+        }
+        else if(jugador=="papel" && aleatorio=="piedra")
+        {
+            return "Jugador: "+jugador+". Computadora: "+aleatorio+". Resultado: Gana el jugador";
+        }
+        else if(jugador=="tijera" && aleatorio=="papel")
+        {
+            return "Jugador: "+jugador+". Computadora: "+aleatorio+". Resultado: Gana el jugador";
+        }
+        else
+        {
+            return "Jugador: "+jugador+". Computadora: "+aleatorio+". Resultado: Gana la computadora";
+        }
+    }
+    juego();
+
+</script>
+
+</body>
+</html>
